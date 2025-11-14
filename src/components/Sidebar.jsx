@@ -1,53 +1,62 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import {
+  LayoutDashboard,
+  Coins,
+  Send,
+  Palette,
+  PlusCircle,
+  Store,
+  Images
+} from "lucide-react";
+
 
 function Sidebar({ isOpen, setIsOpen }) {
   const location = useLocation();
-
-  const menuItems = [
-    { 
-      path: '/dashboard', 
-      icon: '📊', 
-      label: 'Token Dashboard',
-      description: 'View token info'
-    },
-    { 
-      path: '/mint', 
-      icon: '💰', 
-      label: 'Mint Tokens',
-      description: 'Create & burn tokens'
-    },
-    { 
-      path: '/transfer', 
-      icon: '📤', 
-      label: 'Transfer Tokens',
-      description: 'Send tokens'
-    },
-    { 
-      path: '/nft-dashboard', 
-      icon: '🎨', 
-      label: 'NFT Dashboard',
-      description: 'NFT overview'
-    },
-    { 
-      path: '/create-nft', 
-      icon: '✨', 
-      label: 'Create NFT',
-      description: 'Mint new NFT'
-    },
-    { 
-      path: '/marketplace', 
-      icon: '🛒', 
-      label: 'Marketplace',
-      description: 'Buy NFTs'
-    },
-    { 
-      path: '/my-nfts', 
-      icon: '🖼️', 
-      label: 'My NFTs',
-      description: 'Your collection'
-    },
-  ];
+const menuItems = [
+  { 
+    path: '/dashboard',
+    icon: <LayoutDashboard size={28}  strokeWidth={2} />,
+    label: 'Token Dashboard',
+    description: 'View token info'
+  },
+  { 
+    path: '/mint',
+    icon: <Coins size={22} strokeWidth={2}/>,
+    label: 'Mint Tokens',
+    description: 'Create & burn tokens'
+  },
+  { 
+    path: '/transfer',
+    icon: <Send size={22} strokeWidth={2}/>,
+    label: 'Transfer Tokens',
+    description: 'Send tokens'
+  },
+  { 
+    path: '/nft-dashboard',
+    icon: <Palette size={22} strokeWidth={2}/>,
+    label: 'NFT Dashboard',
+    description: 'NFT overview'
+  },
+  { 
+    path: '/create-nft',
+    icon: <PlusCircle size={22}strokeWidth={2} />,
+    label: 'Create NFT',
+    description: 'Mint new NFT'
+  },
+  { 
+    path: '/marketplace',
+    icon: <Store size={22} strokeWidth={2}/>,
+    label: 'Marketplace',
+    description: 'Buy NFTs'
+  },
+  { 
+    path: '/my-nfts',
+    icon: <Images size={22} />,
+    label: 'My NFTs',
+    description: 'Your collection'
+  },
+];
 
   return (
     <>
@@ -58,7 +67,7 @@ function Sidebar({ isOpen, setIsOpen }) {
         }`}
         style={{ overflowX: 'hidden' }}
       >
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 mt-4">
           {menuItems.map((item) => {
             const isActive = location.pathname === item.path;
 

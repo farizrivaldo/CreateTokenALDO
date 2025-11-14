@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useWeb3 } from '../contexts/Web3Context';
 import { Image, TrendingUp, ShoppingBag, Wallet } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 const NFTDashboard = () => {
   const { marketplaceContract, account } = useWeb3();
@@ -8,6 +9,7 @@ const NFTDashboard = () => {
   const [myNFTCount, setMyNFTCount] = useState(0);
   const [listedCount, setListedCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadStats();
@@ -123,9 +125,13 @@ const NFTDashboard = () => {
           <p className="text-slate-300 mb-4">
             Mint your own unique NFT with custom metadata and images
           </p>
-          <a href="/create-nft" className="btn btn-primary inline-block">
-            Create NFT
-          </a>
+         
+        <button
+          onClick={() => navigate("/create-nft")}
+          className="btn btn-primary inline-block"
+        >
+          Create NFT
+        </button>
         </div>
 
         <div className="card">
@@ -133,9 +139,13 @@ const NFTDashboard = () => {
           <p className="text-slate-300 mb-4">
             Browse and purchase NFTs using ALDO tokens
           </p>
-          <a href="/marketplace" className="btn btn-primary inline-block">
-            Browse Marketplace
-          </a>
+        
+        <button
+          onClick={() => navigate("/marketplace")}
+          className="btn btn-primary inline-block"
+        >
+          Browse Marketplace
+        </button>
         </div>
 
         <div className="card">
@@ -143,9 +153,13 @@ const NFTDashboard = () => {
           <p className="text-slate-300 mb-4">
             View and manage your NFT collection
           </p>
-          <a href="/my-nfts" className="btn btn-primary inline-block">
-            View Collection
-          </a>
+       
+           <button
+          onClick={() => navigate("/my-nfts")}
+          className="btn btn-primary inline-block"
+        >
+          View Collection
+        </button>
         </div>
 
         <div className="card">

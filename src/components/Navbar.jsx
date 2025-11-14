@@ -86,7 +86,7 @@ function Navbar() {
 
   return (
     <nav className="bg-slate-800 border-b border-slate-700 px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-8xl mx-auto flex items-center justify-between">
         {/* Logo & Title */}
         <div className="flex items-center gap-4">
           <svg className="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,16 +116,7 @@ function Navbar() {
           </div>
 
           {/* Add Token Button */}
-          <button
-            onClick={addTokenToMetaMask}
-            className="btn btn-secondary py-2 px-4 flex items-center gap-2"
-            title="Add ALDO to MetaMask"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Add ALDO
-          </button>
+      
 
           {/* Account */}
           <div className="card py-2 px-4 flex items-center gap-3">
@@ -137,6 +128,16 @@ function Navbar() {
               <p className="text-sm font-semibold">{shortenAddress(account)}</p>
             </div>
           </div>
+              <button
+            onClick={addTokenToMetaMask}
+            className="btn btn-secondary py-2 px-4 flex items-center gap-2"
+            title="Add ALDO to MetaMask"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            Add ALDO
+          </button>
 
           {/* Disconnect Button */}
           <button

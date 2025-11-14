@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useWeb3 } from '../contexts/Web3Context';
 
 function CreateNFT() {
-  const { marketplaceContract, account } = useWeb3();
+  const { marketplaceContract, account,isOwner } = useWeb3();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -56,6 +56,16 @@ function CreateNFT() {
       setLoading(false);
     }
   };
+
+    if (!isOwner) {
+    return (
+      <div className="card text-center py-12">
+        <div className="text-6xl mb-4">⚠️</div>
+        <h2 className="text-2xl font-bold mb-2">Owner Access Only</h2>
+        <p className="text-slate-400">Only the contract owner can mint and burn tokens.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
