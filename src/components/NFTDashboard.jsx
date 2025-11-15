@@ -4,7 +4,7 @@ import { Image, TrendingUp, ShoppingBag, Wallet } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 
 const NFTDashboard = () => {
-  const { marketplaceContract, account } = useWeb3();
+  const { marketplaceContract, account, provider } = useWeb3();
   const [totalNFTs, setTotalNFTs] = useState(0);
   const [myNFTCount, setMyNFTCount] = useState(0);
   const [listedCount, setListedCount] = useState(0);

@@ -13,7 +13,8 @@ export const TOKEN_ABI = [
   "function burn(uint256 amount)",
   "function owner() view returns (address)",
   "function approve(address spender, uint256 amount) returns (bool)",
-  "function allowance(address owner, address spender) view returns (uint256)"
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "event Transfer(address indexed from, address indexed to, uint256 value)"
 ];
 
 export const MARKETPLACE_ABI = [

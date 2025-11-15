@@ -218,6 +218,10 @@
 // };
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+
+
+
+
 import { CONTRACTS, TOKEN_ABI, MARKETPLACE_ABI } from '../utils/contracts';
 
 const Web3Context = createContext();
@@ -242,12 +246,15 @@ export const Web3Provider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [network, setNetwork] = useState(null);
 
+
   useEffect(() => {
     if (account && tokenContract) {
       loadBalances();
       checkOwner();
     }
   }, [account, tokenContract]);
+
+    
 
   const connectWallet = async () => {
     try {
@@ -284,6 +291,9 @@ export const Web3Provider = ({ children }) => {
         signer
       );
 
+  
+      
+      
       const marketplaceContract = new ethers.Contract(
         CONTRACTS.MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
@@ -331,6 +341,8 @@ export const Web3Provider = ({ children }) => {
     setIsOwner(false);
     window.location.reload();
   };
+
+ 
 
   const loadBalances = async () => {
     try {
@@ -396,6 +408,27 @@ export const Web3Provider = ({ children }) => {
         return false;
       }
     };
+      
+useEffect(() => {
+  if (!tokenContract || !account) return;
+
+  const onTransfer = (from, to, value, event) => {
+    if (from.toLowerCase() === account.toLowerCase() || to.toLowerCase() === account.toLowerCase()) {
+      console.log("Transfer detected!");
+      console.log("From:", from);
+      console.log("To:", to);
+      console.log("Amount:", ethers.utils.formatEther(value)); // 18 decimals
+    }
+  };
+
+  tokenContract.on("Transfer", onTransfer);
+
+  return () => {
+    tokenContract.off("Transfer", onTransfer);
+  };
+}, [tokenContract, account]);
+
+
 
   const value = {
     account,
