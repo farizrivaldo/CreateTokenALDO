@@ -31,5 +31,6 @@ export const MARKETPLACE_ABI = [
   "function owner() view returns (address)",
   "event NFTMinted(uint256 indexed tokenId, address indexed owner, string tokenURI)",
   "event NFTListed(uint256 indexed tokenId, uint256 price, address indexed seller)",
-  "event NFTSold(uint256 indexed tokenId, address indexed buyer, address indexed seller, uint256 price)"
+  "event NFTSold(uint256 indexed tokenId, address indexed buyer, address indexed seller, uint256 price)",
+  "event NFTUnlisted(uint256 indexed tokenId, address indexed seller)"
 ];

@@ -5,6 +5,8 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@openzeppelin/contracts": "^5.4.0",
+    "@privy-io/react-auth": "^3.7.0",
+    "@privy-io/wagmi": "^2.0.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -17,11 +19,13 @@
     "react-router-dom": "^7.9.5",
     "react-scripts": "5.0.1",
     "recharts": "^3.4.1",
+    "viem": "^2.39.0",
+    "wagmi": "^2.19.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -1,77 +1,53 @@
 // import React from 'react';
 // import { useWeb3 } from '../contexts/Web3Context';
+// import { usePrivy } from '@privy-io/react-auth';
 
 // function Navbar() {
-//   const { account, balance, tokenBalance, disconnectWallet, addTokenToMetaMask } = useWeb3();
+//   const { account, disconnectWallet, isAAMode } = useWeb3();
+//   const { logout, user } = usePrivy();
 
-//   const shortenAddress = (addr) => {
-//     return `${addr.substring(0, 6)}...${addr.substring(addr.length - 4)}`;
+//   const handleDisconnect = () => {
+//     if (isAAMode) {
+//       logout();
+//     } else {
+//       disconnectWallet();
+//     }
+//   };
+
+//   const shortenAddress = (address) => {
+//     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+//   };
+
+//   const getUserDisplay = () => {
+//     if (isAAMode && user) {
+//       return user?.email?.address || user?.google?.email || 'AA User';
+//     }
+//     return shortenAddress(account);
 //   };
 
 //   return (
-//     <nav className="bg-slate-800 border-b border-slate-700 px-6 py-4">
-//       <div className="max-w-8xl mx-auto flex items-center justify-between">
-//         {/* Logo & Title */}
-//         <div className="flex items-center gap-4">
-//           <svg className="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-//           </svg>
-//           <div>
-//             <h1 className="text-xl font-bold gradient-text">ALDO DAPP</h1>
-//             <p className="text-xs text-slate-400">Sepolia Testnet</p>
-//           </div>
+//     <nav className="bg-slate-800 border-b border-slate-700 px-6 py-4 sticky top-0 z-50">
+//       <div className="flex items-center justify-between">
+//         <div>
+//           <h1 className="text-2xl font-bold gradient-text">ALDO DAPP</h1>
+//           <p className="text-xs text-slate-400">
+//             {isAAMode ? '🔐 Account Abstraction Mode' : '🦊 MetaMask Connected'}
+//           </p>
 //         </div>
 
-//         {/* Right Side */}
-//         <div className="flex items-center gap-3">
-//           {/* Balances */}
-//           <div className="card py-2 px-4">
-//             <div className="flex items-center gap-4">
-//               <div className="text-right">
-//                 <p className="text-xs text-slate-400">ETH Balance</p>
-//                 <p className="text-sm font-semibold">{parseFloat(balance).toFixed(4)} ETH</p>
-//               </div>
-//               <div className="w-px h-8 bg-slate-600"></div>
-//               <div className="text-right">
-//                 <p className="text-xs text-slate-400">ALDO Balance</p>
-//                 <p className="text-sm font-semibold text-indigo-400">{parseFloat(tokenBalance).toFixed(2)} ALDO</p>
-//               </div>
+//         <div className="flex items-center gap-4">
+//           <div className="bg-slate-700 px-4 py-2 rounded-lg">
+//             <div className="flex items-center gap-2">
+//               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+//               <span className="text-sm font-mono">{getUserDisplay()}</span>
 //             </div>
 //           </div>
 
-//           {/* Add Token Button */}
-      
-
-//           {/* Account */}
-//           <div className="card py-2 px-4 flex items-center gap-3">
-//             <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-//             </svg>
-//             <div>
-//               <p className="text-xs text-slate-400">Connected</p>
-//               <p className="text-sm font-semibold">{shortenAddress(account)}</p>
-//             </div>
-//           </div>
-//               <button
-//             onClick={addTokenToMetaMask}
-//             className="btn btn-secondary py-2 px-4 flex items-center gap-2"
-//             title="Add ALDO to MetaMask"
-//           >
-//             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-//             </svg>
-//             Add ALDO
-//           </button>
-
-//           {/* Disconnect Button */}
 //           <button
-//             onClick={disconnectWallet}
-//             className="btn btn-secondary py-2 px-4 flex items-center gap-2"
+//             onClick={handleDisconnect}
+//             className="btn btn-secondary"
 //           >
-//             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-//             </svg>
-//             Disconnect
+//             {isAAMode ? 'Logout' : 'Disconnect'}
 //           </button>
 //         </div>
 //       </div>
@@ -81,111 +57,58 @@
 
 // export default Navbar;
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useWeb3 } from '../contexts/Web3Context';
+import { usePrivy } from '@privy-io/react-auth';
 
 function Navbar() {
-  const { account, balance, tokenBalance, disconnectWallet, addTokenToMetaMask } = useWeb3();
-  const [scroll, setScroll] = useState(0);
+  const { account, disconnectWallet, isAAMode, user } = useWeb3();
+  const { logout } = usePrivy();
 
-  const shortenAddress = (addr) => {
-    if (!addr) return '';
-    return `${addr.substring(0, 6)}...${addr.substring(addr.length - 4)}`;
+  const handleDisconnect = () => {
+    if (isAAMode) {
+      logout();
+    } else {
+      disconnectWallet();
+    }
   };
 
-  // Track scroll untuk efek shadow dan sedikit geser
-  const handleScroll = () => {
-    setScroll(window.scrollY);
+  const shortenAddress = (address) => {
+    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const getUserDisplay = () => {
+    if (isAAMode && user) {
+      // Show email for AA mode
+      return user?.email?.address || user?.google?.email || shortenAddress(account);
+    }
+    // Show shortened address for MetaMask
+    return shortenAddress(account);
+  };
 
   return (
-    <nav
-      className={`sticky top-0 z-50 bg-slate-800 px-6 py-4 transition-all duration-300 ${
-        scroll > 5 ? 'shadow-lg' : ''
-      }`}
-    >
-      <div className="max-w-8xl mx-auto flex items-center justify-between">
-        {/* Logo & Title */}
-        <div className="flex items-center gap-4">
-          <svg className="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <div>
-            <h1 className="text-xl font-bold gradient-text">ALDO DAPP</h1>
-            <p className="text-xs text-slate-400">Sepolia Testnet</p>
-          </div>
+    <nav className="bg-slate-800 border-b border-slate-700 px-6 py-4 sticky top-0 z-50">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold gradient-text">ALDO DAPP</h1>
+          <p className="text-xs text-slate-400">
+            {isAAMode ? '🔐 Account Abstraction Mode' : '🦊 MetaMask Connected'}
+          </p>
         </div>
 
-        {/* Right Side */}
-        <div className="flex items-center gap-3">
-          {/* Balances */}
-          <div className="card py-2 px-4">
-            <div className="flex items-center gap-4">
-              <div className="text-right">
-                <p className="text-xs text-slate-400">ETH Balance</p>
-                <p className="text-sm font-semibold">{parseFloat(balance).toFixed(4)} ETH</p>
-              </div>
-              <div className="w-px h-8 bg-slate-600"></div>
-              <div className="text-right">
-                <p className="text-xs text-slate-400">ALDO Balance</p>
-                <p className="text-sm font-semibold text-indigo-400">{parseFloat(tokenBalance).toFixed(2)} ALDO</p>
-              </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-slate-700 px-4 py-2 rounded-lg">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-mono">{getUserDisplay()}</span>
             </div>
           </div>
 
-          {/* Add Token Button */}
-          
-
-          {/* Account */}
-          <div className="card py-2 px-4 flex items-center gap-3">
-            <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-              />
-            </svg>
-            <div>
-              <p className="text-xs text-slate-400">Connected</p>
-              <p className="text-sm font-semibold">{shortenAddress(account)}</p>
-            </div>
-          </div>
           <button
-            onClick={addTokenToMetaMask}
-            className="btn btn-secondary py-2 px-4 flex items-center gap-2"
-            title="Add ALDO to MetaMask"
+            onClick={handleDisconnect}
+            className="btn btn-secondary"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Add ALDO
-          </button>
-
-          {/* Disconnect Button */}
-          <button
-            onClick={disconnectWallet}
-            className="btn btn-secondary py-2 px-4 flex items-center gap-2"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            Disconnect
+            {isAAMode ? 'Logout' : 'Disconnect'}
           </button>
         </div>
       </div>

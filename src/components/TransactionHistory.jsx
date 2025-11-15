@@ -9,6 +9,8 @@ function TransactionHistory() {
   const [filter, setFilter] = useState('all');
 
   const loadTransactions = useCallback(async () => {
+    console.log(provider, account, tokenContract, marketplaceContract,);
+    
     if (!provider || !account || !tokenContract || !marketplaceContract) return;
 
     try {

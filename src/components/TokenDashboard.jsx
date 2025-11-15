@@ -5,7 +5,7 @@ import TransactionHistory from './TransactionHistory'; // ← Add this
 import TokenStatistics from './TokenStatistics';
 
 function TokenDashboard() {
-  const { tokenContract, account, tokenBalance, isOwner } = useWeb3();
+  const { tokenContract, account, tokenBalance, isOwner,isAAMode } = useWeb3();
   const [totalSupply, setTotalSupply] = useState('0');
   const [tokenName, setTokenName] = useState('');
   const [tokenSymbol, setTokenSymbol] = useState('');
@@ -13,6 +13,10 @@ function TokenDashboard() {
 
   useEffect(() => {
     loadTokenInfo();
+    console.log("============================================================");
+    console.log(tokenContract);
+    
+      console.log("============================================================");
   }, [tokenContract]);
 
   const loadTokenInfo = async () => {
@@ -118,7 +122,8 @@ function TokenDashboard() {
           </div>
         </div>
       </div>
-        <TokenStatistics />
+      {isAAMode ? <></>: <TokenStatistics />}
+       
   <TransactionHistory />
 
       {/* Features Grid */}

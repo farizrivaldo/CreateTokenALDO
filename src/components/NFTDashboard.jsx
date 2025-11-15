@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useWeb3 } from '../contexts/Web3Context';
 import { Image, TrendingUp, ShoppingBag, Wallet } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import { logDOM } from '@testing-library/dom';
 
 const NFTDashboard = () => {
   const { marketplaceContract, account, provider } = useWeb3();
@@ -26,6 +27,7 @@ const NFTDashboard = () => {
       // Count owned NFTs
       let owned = 0;
       let listed = 0;
+    
       
       for (let i = 1; i <= total.toNumber(); i++) {
         try {
