@@ -36,7 +36,7 @@ function LandingPage() {
           Decentralized Application for ALDO Token & NFT Marketplace
         </p>
         <p className="text-md text-slate-400 mb-12">
-          Built on Sepolia Testnet · Full Blockchain · No Backend
+          Built on Ethereum Sepolia Testnet
         </p>
 
         {/* Connect Button */}
@@ -60,9 +60,38 @@ function LandingPage() {
           )}
         </button>
 
-        <p className="text-sm text-slate-500 mt-4">
-          Make sure you're on Sepolia testnet
-        </p>
+       {/* <p className="text-sm text-slate-500 mt-4">
+  Make sure you're on Sepolia testnet
+</p> */}
+<br />
+<br />
+<div className="text-sm text-blue-600 mt-2 space-x-4">
+  <a
+    href="https://metamask.io/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="underline"
+  >
+    Install MetaMask
+  </a>
+  <a
+    href="https://cloud.google.com/application/web3/faucet"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="underline"
+  >
+   Get Faucet
+  </a>
+  <a
+    href="https://revoke.cash/learn/wallets/add-network/ethereum-sepolia"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="underline"
+  >
+    Sepolia Testnet
+  </a>
+</div>
+
 
         {/* Features Grid */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
