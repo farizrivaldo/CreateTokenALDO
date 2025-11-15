@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useWeb3 } from '../contexts/Web3Context';
 import { ethers } from 'ethers';
 import TransactionHistory from './TransactionHistory'; // ← Add this
+import TokenStatistics from './TokenStatistics';
 
 function TokenDashboard() {
   const { tokenContract, account, tokenBalance, isOwner } = useWeb3();
@@ -117,7 +118,9 @@ function TokenDashboard() {
           </div>
         </div>
       </div>
+        <TokenStatistics />
   <TransactionHistory />
+
       {/* Features Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="card">

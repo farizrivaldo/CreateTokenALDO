@@ -435,12 +435,7 @@ try {
                     {/* Amount Column */}
                     <td className="py-3 px-4">
                       {tx.amount && (
-                        <span className={`font-semibold ${
-                          tx.type === 'token_burn' ? 'text-red-400' :
-                          tx.type === 'token_mint' ? 'text-green-400' :
-                          tx.direction === 'sent' ? 'text-orange-400' :
-                          'text-indigo-400'
-                        }`}>
+                        <span className={`font-semibold text-neutral-50`}>
                           {parseFloat(tx.amount).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 4
@@ -448,17 +443,17 @@ try {
                         </span>
                       )}
                       {tx.price && (
-                        <span className="font-semibold text-green-400">
+                        <span className="font-semibold text-neutral-50">
                           {parseFloat(tx.price).toFixed(2)} ALDO
                         </span>
                       )}
                       {tx.tokenId && !tx.price && !tx.amount && (
-                        <span className="text-slate-400">NFT #{tx.tokenId}</span>
+                        <span className="font-semibold text-neutral-50">NFT #{tx.tokenId}</span>
                       )}
                     </td>
 
                     {/* Time Column */}
-                    <td className="py-3 px-4 text-xs text-slate-400">
+                    <td className="py-3 px-4 text-xs font-semibold text-neutral-50">
                       {formatDate(tx.timestamp)}
                     </td>
 
