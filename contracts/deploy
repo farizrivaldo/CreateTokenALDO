@@ -1,0 +1,27 @@
+┌──(fedoraos㉿ip-10-126-10-232)-[~/Documents/GitHub/createtokenaldo/contracts]
+└─$ npx hardhat run scripts/deploy.js --network sepolia
+[dotenv@17.2.3] injecting env (4) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+🚀 Deploying ALDO Token and Marketplace to Sepolia...
+📝 Deploying ALDO Token...
+✅ ALDO Token deployed to: 0xDB9ba19139D849A3E509F0D5e20536C4821e975e
+📝 Deploying ALDO Marketplace...
+✅ ALDO Marketplace deployed to: 0x679C0F7EC386689C3b12d3d636351A5ef646C098
+===========================================
+🎉 DEPLOYMENT SUCCESSFUL!
+===========================================
+📍 ALDO Token Address: 0xDB9ba19139D849A3E509F0D5e20536C4821e975e
+📍 Marketplace Address: 0x679C0F7EC386689C3b12d3d636351A5ef646C098
+===========================================
+⚠️  IMPORTANT NEXT STEPS:
+1. Copy addresses above
+2. Update src/utils/contracts.js
+3. Update .env file
+4. Verify on Sepolia Etherscan:
+   https://sepolia.etherscan.io/address/0xDB9ba19139D849A3E509F0D5e20536C4821e975e
+   https://sepolia.etherscan.io/address/0x679C0F7EC386689C3b12d3d636351A5ef646C098
+✅ Run: npm start
+┌──(fedoraos㉿ip-10-126-10-232)-[~/Documents/GitHub/createtokenaldo/contracts]
+└─$
+
+Show less
