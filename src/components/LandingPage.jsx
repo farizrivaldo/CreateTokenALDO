@@ -145,7 +145,7 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{
+    <div className="min-h-screen flex items-center justify-center py-12 px-4" style={{
       background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)'
     }}>
       <div className="text-center px-6 max-w-4xl">
@@ -175,9 +175,7 @@ function LandingPage() {
         <p className="text-xl text-slate-300 mb-4">
           Decentralized Application for ALDO Token & NFT Marketplace
         </p>
-        <p className="text-md text-slate-400 mb-12">
-          Built on Sepolia Testnet · Full Blockchain · No Backend
-        </p>
+
 
         {/* Connection Options */}
         <div className="mb-8">
@@ -238,6 +236,32 @@ function LandingPage() {
             </button>
           </div>
         </div>
+         <div className="text-sm text-blue-600 mt-2 space-x-4">
+   <a
+     href="https://metamask.io/"
+     target="_blank"
+     rel="noopener noreferrer"
+     className="underline"
+   >
+     Install MetaMask
+   </a>
+   <a
+     href="https://cloud.google.com/application/web3/faucet"
+     target="_blank"
+     rel="noopener noreferrer"
+     className="underline"
+   >
+    Get Faucet
+   </a>
+   <a
+     href="https://revoke.cash/learn/wallets/add-network/ethereum-sepolia"
+     target="_blank"
+     rel="noopener noreferrer"
+     className="underline"
+   >
+     Sepolia Testnet
+   </a>
+ </div>
 
         {/* Features Grid */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
