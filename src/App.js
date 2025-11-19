@@ -115,6 +115,9 @@ import CreateNFT from './components/CreateNFT';
 import NFTMarketplace from './components/NFTMarketplace';
 import MyNFTs from './components/MyNFTs';
 
+//AI
+import AIChatbot from './components/AIChatbot'; 
+
 function AppContent() {
   const { account, loading } = useWeb3();
   const { authenticated, ready } = usePrivy();
@@ -188,6 +191,7 @@ function AppContent() {
           </main>
         </div>
       </div>
+         <AIChatbot />
     </Router>
   );
 }
