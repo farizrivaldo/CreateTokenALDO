@@ -520,90 +520,144 @@ export const Web3Provider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const setupPrivyWallet = async () => {
-      if (authenticated && ready && wallets && wallets.length > 0 && !account) {
-        try {
-          const embeddedWallet = wallets.find(
-            wallet => wallet.walletClientType === 'privy'
+useEffect(() => {
+  const setupPrivyWallet = async () => {
+    if (authenticated && ready && wallets && wallets.length > 0 && !account && !loading) {
+      try {
+        // DEBUG: Log semua wallet info
+        console.log('All wallets:', wallets);
+        wallets.forEach((wallet, index) => {
+          console.log(`Wallet ${index}:`, {
+            walletClientType: wallet.walletClientType,
+            connectorType: wallet.connectorType,
+            address: wallet.address,
+            chainId: wallet.chainId,
+          });
+        });
+
+        // Coba berbagai cara find wallet
+        let embeddedWallet = wallets.find(
+          wallet => wallet.walletClientType === 'privy'
+        );
+        
+        if (!embeddedWallet) {
+          // Coba alternatif lain
+          embeddedWallet = wallets.find(
+            wallet => wallet.connectorType === 'embedded'
           );
-
-          if (embeddedWallet) {
-            setLoading(true);
-
-            const ethereum = await embeddedWallet.getEthereumProvider();
-            
-            try {
-              await ethereum.request({
-                method: 'wallet_switchEthereumChain',
-                params: [{ chainId: '0xaa36a7' }],
-              });
-            } catch (switchError) {
-              if (switchError.code === 4902) {
-                await ethereum.request({
-                  method: 'wallet_addEthereumChain',
-                  params: [{
-                    chainId: '0xaa36a7',
-                    chainName: 'Sepolia Testnet',
-                    nativeCurrency: { name: 'Sepolia ETH', symbol: 'SEP', decimals: 18 },
-                    rpcUrls: ['https://rpc.sepolia.org'],
-                    blockExplorerUrls: ['https://sepolia.etherscan.io']
-                  }]
-                });
-              } else {
-                throw switchError;
-              }
-            }
-
-            const privyProvider = new ethers.providers.Web3Provider(ethereum);
-            const privySigner = privyProvider.getSigner();
-            const network = await privyProvider.getNetwork();
-
-            if (network.chainId !== 11155111) {
-              alert('⚠️ Failed to switch to Sepolia. Please try again.');
-              setLoading(false);
-              return;
-            }
-
-            const tokenContract = new ethers.Contract(
-              CONTRACTS.TOKEN_ADDRESS,
-              TOKEN_ABI,
-              privySigner
-            );
-            
-            const marketplaceContract = new ethers.Contract(
-              CONTRACTS.MARKETPLACE_ADDRESS,
-              MARKETPLACE_ABI,
-              privySigner
-            );
-
-            const ecosystemContract = new ethers.Contract(
-              CONTRACTS.ECOSYSTEM_ADDRESS,
-              ECOSYSTEM_ABI,
-              privySigner
-            );
-
-            setProvider(privyProvider);
-            setSigner(privySigner);
-            setAccount(embeddedWallet.address);
-            setTokenContract(tokenContract);
-            setMarketplaceContract(marketplaceContract);
-            setEcosystemContract(ecosystemContract);
-            setNetwork(network);
-
-            console.log('✅ Privy wallet connected:', embeddedWallet.address);
-            setLoading(false);
-          }
-        } catch (error) {
-          console.error('Error setting up Privy wallet:', error);
-          alert('Failed to setup Privy wallet. Please try again.');
-          setLoading(false);
         }
-      }
-    };
+        
+        if (!embeddedWallet) {
+          // Fallback: ambil wallet pertama
+          embeddedWallet = wallets[0];
+          console.log('Using first wallet as fallback:', embeddedWallet);
+        }
 
-    setupPrivyWallet();
-  }, [authenticated, ready, wallets, account]);
+        if (!embeddedWallet) {
+          console.error('Still no wallet found');
+          return;
+        }
+
+        console.log('Selected wallet:', embeddedWallet);
+        
+        setLoading(true);
+
+        const ethereum = await embeddedWallet.getEthereumProvider();
+        const privyProvider = new ethers.providers.Web3Provider(ethereum);
+        
+        const accounts = await privyProvider.listAccounts();
+        console.log('Provider accounts:', accounts);
+        
+        if (accounts.length === 0) {
+          console.error('No accounts found from provider');
+          setLoading(false);
+          return;
+        }
+
+        const walletAddress = accounts[0];
+        const currentNetwork = await privyProvider.getNetwork();
+        
+        console.log('Current network:', currentNetwork.chainId);
+
+        if (currentNetwork.chainId !== 11155111) {
+          console.log('Switching to Sepolia...');
+          try {
+            await ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0xaa36a7' }],
+            });
+            
+            await new Promise(resolve => setTimeout(resolve, 1000));
+          } catch (switchError) {
+            if (switchError.code === 4902) {
+              await ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [{
+                  chainId: '0xaa36a7',
+                  chainName: 'Sepolia Testnet',
+                  nativeCurrency: { name: 'Sepolia ETH', symbol: 'SEP', decimals: 18 },
+                  rpcUrls: ['https://rpc.sepolia.org'],
+                  blockExplorerUrls: ['https://sepolia.etherscan.io']
+                }]
+              });
+              
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            } else {
+              throw switchError;
+            }
+          }
+        }
+
+        const finalProvider = new ethers.providers.Web3Provider(ethereum);
+        const finalNetwork = await finalProvider.getNetwork();
+        
+        if (finalNetwork.chainId !== 11155111) {
+          alert('⚠️ Failed to switch to Sepolia. Please try again.');
+          setLoading(false);
+          return;
+        }
+
+        const privySigner = finalProvider.getSigner();
+
+        const tokenContract = new ethers.Contract(
+          CONTRACTS.TOKEN_ADDRESS,
+          TOKEN_ABI,
+          privySigner
+        );
+        
+        const marketplaceContract = new ethers.Contract(
+          CONTRACTS.MARKETPLACE_ADDRESS,
+          MARKETPLACE_ABI,
+          privySigner
+        );
+
+        const ecosystemContract = new ethers.Contract(
+          CONTRACTS.ECOSYSTEM_ADDRESS,
+          ECOSYSTEM_ABI,
+          privySigner
+        );
+
+        setProvider(finalProvider);
+        setSigner(privySigner);
+        setTokenContract(tokenContract);
+        setMarketplaceContract(marketplaceContract);
+        setEcosystemContract(ecosystemContract);
+        setNetwork(finalNetwork);
+        setAccount(walletAddress);
+
+        console.log('✅ Privy wallet connected:', walletAddress);
+        setLoading(false);
+        
+      } catch (error) {
+        console.error('Error setting up Privy wallet:', error);
+        alert('Failed to setup Privy wallet: ' + error.message);
+        setLoading(false);
+      }
+    }
+  };
+
+  setupPrivyWallet();
+}, [authenticated, ready, wallets, account, loading]);
 
   useEffect(() => {
     if (!tokenContract || !account) return;
