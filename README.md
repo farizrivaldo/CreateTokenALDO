@@ -192,7 +192,7 @@ Network: Sepolia Testnet
 
 ### ALDOEcosystem
 ```solidity
-Contract Address: [Deploy and update here]
+Contract Address: 0xFc041ecbaC08fD33c73266a60cBa673C15d5b4E4
 Network: Sepolia Testnet
 ```
 
