@@ -25,3 +25,40 @@
 └─$
 
 Show less
+
+
+
+
+//==========================================
+TAMBAHFITUR BROO
+//==========================================
+
+
+📍 Deploying from address: 0xB1897375cC374E8c394276b3d173E5a2680214BD
+💰 Account balance: 0.352124675236918655 ETH
+
+📝 Step 1: Checking for ALDO Token...
+✅ Using existing ALDO Token at: 0xDB9ba19139D849A3E509F0D5e20536C4821e975e
+
+📝 Step 2: Deploying ALDO Ecosystem...
+⏳ Waiting for deployment confirmation...
+
+✅ ===================================
+   DEPLOYMENT SUCCESSFUL!
+===================================
+📍 ALDO Token Address: 0xDB9ba19139D849A3E509F0D5e20536C4821e975e
+📍 Ecosystem Address: 0xd83EDA38eC1E7b63eA2D9d6C9da2A1460658be95
+
+📋 Next Steps:
+   1. Verify contracts on Etherscan
+   2. Approve ecosystem contract to spend tokens
+   3. Deposit reward tokens for staking
+
+💡 Verification Commands:
+   npx hardhat verify --network sepolia 0xd83EDA38eC1E7b63eA2D9d6C9da2A1460658be95 0xDB9ba19139D849A3E509F0D5e20536C4821e975e
+
+🔗 View on Etherscan:
+   https://sepolia.etherscan.io/address/0xd83EDA38eC1E7b63eA2D9d6C9da2A1460658be95
+===================================
+
+💾 Deployment info saved to deployment-info.json
